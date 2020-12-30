@@ -1,0 +1,16 @@
+{
+  "short_name": "Consume Ñuble",
+  "name": "Consume Ñuble",
+  "icons": [
+    {
+      "src": "/logo512.jpg",
+      "sizes": "512x512",
+      "type": "image/jpg"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "spalsh_pages":null,
+  "background_color": "#ffffff"
+}

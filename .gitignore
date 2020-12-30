@@ -1,0 +1,7 @@
+*.pyc
+
+.vscode/
+.DS_Store
+.idea/
+env/
+wpa/node_modules
