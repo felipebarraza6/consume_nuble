@@ -1,12 +1,10 @@
 import { GET, POST_LOGIN , POST, PATCH, POST_CREATE_USER } from './config'
 
 const login = async(data)=>{
-    console.log(data)
     const request = await POST_LOGIN('login/', {
         email: data.user,
         password: data.password
     })
-    console.log({request})
     return request.data
 }
 

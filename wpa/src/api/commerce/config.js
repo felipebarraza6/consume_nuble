@@ -7,7 +7,7 @@ const INSTANCE = axios.create({
 
 const INSTANCE_LOGIN = axios.create({
     //baseURL:"http://45.236.131.138:8000/users/"
-    baseURL:"http://localhost:8000/commerce/"
+    baseURL:"http://localhost:8000/users/"
 })
 
 

@@ -57,7 +57,11 @@ const Login = ({visible}) =>{
 
             <Form
                 onFinish={(values)=>{
-                    authProcess(values)
+                  values={
+                    ...values,
+                    "user": values.user.toLowerCase()
+                  }  
+                  authProcess(values)
                 }}
 
             >
