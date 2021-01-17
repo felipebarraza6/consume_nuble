@@ -55,8 +55,6 @@ const Login = ({visible}) =>{
         >
             {!signup.visible ?
 
-
-        
             <Form
                 onFinish={(values)=>{
                     authProcess(values)
@@ -66,13 +64,13 @@ const Login = ({visible}) =>{
                 <img src={Logo} style={styles.logo} />
                 <List style={styles.list}>
                 <Form.Item name='user'> 
-                    <InputItem placeholder='Usuario' type='text' >
+                    <InputItem placeholder='Email' type='text' >
                         <UserOutlined />
                     </InputItem>                    
                 </Form.Item>
                 <Form.Item name='password'>
                     <InputItem placeholder='Contraseña' type='password'>
-                        <EllipsisOutlined />
+                       <EllipsisOutlined />
                     </InputItem>                  
                 </Form.Item>
                 
@@ -107,6 +105,7 @@ const Login = ({visible}) =>{
                 
             }}
         >
+              <Button type='primary' inline style={{"margin":"10px"}} onClick={()=>setSignUp({...signup, visible:false})}>Ir a Iniciar Sesion</Button>
             <List style={styles.list}>
             <Form.Item name='email' rules={[{ required: true, message:'Campo Obligatorio', type:'email', }]}> 
                 <InputItem placeholder='Email' >
@@ -148,11 +147,8 @@ const Login = ({visible}) =>{
             
             </List>
             <Form.Item>
-                
                 <ButtonForm htmlType="submit" style={styles.btn_login}>Crear</ButtonForm>                
                 <ButtonForm onClick={()=>dispatch({type:'NOVISIBLE'})} style={styles.btn_cancel}>Cancelar</ButtonForm>                 
-                <WhiteSpace/>
-                <Button type='ghost' inline style={{"margin":"20px"}} onClick={()=>setSignUp({...signup, visible:false})}>Ir a Iniciar Sesion</Button>       
             </Form.Item>                
         </Form>            
 
