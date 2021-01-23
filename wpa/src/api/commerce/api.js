@@ -8,6 +8,15 @@ const login = async(data)=>{
     return request.data
 }
 
+const listPosts = async()=>{
+    const request = await GET('posts/')
+    return request
+}
+const listRoute = async() => {
+    const request = await GET('routes/')
+    return request
+}
+
 const createUser = async(data)=>{
     const request = await POST_CREATE_USER('signup/', data)
     return request.data
@@ -53,7 +62,8 @@ export const endpoints = {
     },
     login,
     createUser,
-    updateUser
-    
+    updateUser,
+    listPosts,
+    listRoute
 }
 

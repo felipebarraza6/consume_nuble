@@ -260,6 +260,7 @@ const styles = {
     },
     logo:{
         width:'45%',
+        marginBottom:'20px'
 
     },
     title: {        

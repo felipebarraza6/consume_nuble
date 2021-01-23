@@ -31,7 +31,7 @@ class User(ApiModel, AbstractUser):
     phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username', 'first_name', 'last_name', 'phone_number']
+    REQUIRED_FIELDS = ['username', 'phone_number']
 
     is_verified = models.BooleanField(
         'verified',

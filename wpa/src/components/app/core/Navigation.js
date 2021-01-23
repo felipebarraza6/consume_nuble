@@ -42,6 +42,21 @@ const Navigation = () =>{
                         : <HomeOutlined style={styles.icon} />}
                     </Link>}   
                 />
+              <ContainerNav.Item
+                  title='Empresas'
+                  icon={<Link to='/shop' onClick={() =>
+                  setState({
+                    homeScreen:false,
+                    shopScreen: true,
+                    profileScreen: false
+                  })
+              }>
+                  {state.shopScreen ? <ShopFilled style={styles.iconSelectShop} />
+                  : <ShopOutlined style={styles.icon} />}
+                    </Link>}
+      />
+
+
                 <ContainerNav.Item
                     title='Turismo'
                     icon={<Link to='/tourism' onClick={() => 
@@ -54,20 +69,6 @@ const Navigation = () =>{
                         }>
                         {state.tourismScreen ? <CarFilled style={styles.iconSelectTourism} /> 
                         : <CarOutlined style={styles.icon} />}
-                    </Link>}   
-                />
-                <ContainerNav.Item
-                    title='Empresas'
-                    icon={<Link to='/shop' onClick={() => 
-                        setState({                                
-                                homeScreen:false,
-                                tourismScreen: false,
-                                shopScreen: true,
-                                profileScreen: false
-                            })
-                        }>
-                        {state.shopScreen ? <ShopFilled style={styles.iconSelectShop} /> 
-                        : <ShopOutlined style={styles.icon} />}
                     </Link>}   
                 />
                 <ContainerNav.Item
@@ -98,7 +99,7 @@ const styles = {
     iconSelectTourism: {
         fontSize: '26px',
         marginTop: '4px',
-        color:'#389e0d'
+        color:'#531dab'
     },
     iconSelectShop: {
         fontSize: '26px',

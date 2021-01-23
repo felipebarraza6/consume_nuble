@@ -36,7 +36,7 @@ const ShareButtons = ({quote, url, notice}) => {
             <PinterestShareButton 
                 description={quote} 
                 url={url} 
-                media={notice.better_featured_image.source_url} 
+                media={notice.principal_image} 
                 style={styles.links.marginIcon}>
                 <PinterestIcon round size={styles.iconSocial} />
             </PinterestShareButton>   

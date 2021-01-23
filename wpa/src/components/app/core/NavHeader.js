@@ -58,7 +58,7 @@ const styles = {
     tourism: {
         paddingTop: '10px',
         paddingBottom:'10px',
-        backgroundColor: '#389e0d',
+        backgroundColor: '#531dab',
         overflow: 'hidden',        
         position: 'fixed',
         top: '0',

@@ -49,17 +49,10 @@ const UserContainer = () =>{
                         <Form.Item name ='email'>
                             <InputItem />
                         </Form.Item>
-                        <Form.Item name ='first_name'>
-                            <InputItem />
-                        </Form.Item>
-                        <Form.Item name ='last_name'>
-                            <InputItem />
-                        </Form.Item>
                         <Form.Item name ='phone_number' >
                             <InputItem type='number' />
                         </Form.Item>
                     
-                        <BottonForm htmlType='submit' style={styles.btnForm}>Actualizar</BottonForm>
                         <Button type='warning' onClick={()=> { dispatch({type:'LOGOUT'})}} style={styles.closeSession} >Cerrar Sesión</Button>
                         </Form>                                                                      
                  </div>   

@@ -94,7 +94,7 @@ const styles = {
     },
     bottonGallery:{
         marginTop:'20%',
-        backgroundColor:'#389e0d',        
+        backgroundColor:'#391085',        
         color: 'white'
     }
 }

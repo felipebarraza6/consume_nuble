@@ -18,3 +18,8 @@ from .checkouts import (CheckoutModelSerializer,
 from .places import (ListSerializerPlace,
                     CreateRatingSerializer, 
                     ListRatingsSerializer )
+
+from .posts import PostModelSerializer
+
+from .routes_tourims import (RouteModelSerializer, DayNumberModelSerializer,
+                            ElementDayModelSerializer) 

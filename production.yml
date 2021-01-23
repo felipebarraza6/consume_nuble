@@ -1,0 +1,80 @@
+version: '3'
+
+volumes:
+    local_postgres_data: {}
+    local_postgres_data_backups: {}
+    certs: {}
+    vhostd: {}
+    html: {}
+
+services:
+    postgres:
+        image: postgres:11
+        volumes:
+            - local_postgres_data:/var/lib/postgresql/data
+            - local_postgres_data_backups:/backups
+        ports:
+            - "5430:5432"
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
+            POSTGRES_DB: api
+
+    nginx_proxy:
+        image: jwilder/nginx-proxy
+        restart: always
+        ports:
+          - "80:80"
+          - "443:443"
+        volumes:
+          - /var/run/docker.sock:/tmp/docker.sock:ro
+          - certs:/etc/nginx/certs:ro
+          - vhostd:/etc/nginx/vhost.d
+          - html:/usr/share/nginx/html
+        labels:
+          - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
+
+    letsencrypt:
+        image: jrcs/letsencrypt-nginx-proxy-companion
+        restart: always
+        environment:
+          - NGINX_PROXY_CONTAINER=nginx_proxy
+        volumes:
+          - certs:/etc/nginx/certs:rw
+          - vhostd:/etc/nginx/vhost.d
+          - html:/usr/share/nginx/html
+          - /var/run/docker.sock:/var/run/docker.sock:ro
+        depends_on:
+          - nginx_proxy
+
+    django: &django
+        build:
+            context: ./api
+        image: api_consume_nuble
+        volumes:
+            - .:/code
+        expose:
+            - "80"
+        environment:
+            - VIRTUAL_HOST=app.consumenuble.cl,www.app.consumenuble.cl
+            - LETSENCRYPT_HOST=app.consumenuble.cl,www.app.consumenuble.cl
+            - LETSENCRYPT_EMAIL=app@consumenuble.cl
+        depends_on:
+            - nginx_proxy
+            - letsencrypt
+            - postgres
+  
+
+    react:
+        build: ./wpa
+        image: wpa_consume_nuble
+        expose:
+            - "80"
+        environment:
+            - VIRTUAL_HOST=consumenuble.cl,www.consumenuble.cl
+            - LETSENCRYPT_HOST=consumenuble.cl,www.consumenuble.cl
+            - LETSENCRYPT_EMAIL=nodo@consumenuble.cl
+        depends_on:
+            - django
+            - nginx_proxy
+            - letsencrypt

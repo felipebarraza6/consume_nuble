@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 //Components
 import ListNews from '../../components/app/home/news/ListNews'
 import CarrouselGifts from '../../components/app/home/giftcards/CarrouselGifts'
-
+import Carousel from '../../components/app/home/enterprises/Carrousel'
 
 const HomeContainer = () =>{    
 
@@ -18,10 +18,13 @@ const HomeContainer = () =>{
     return(
         <React.Fragment>        
         <div style={styles.container}>      
-            {!globalState.isDetailNews &&
-                  <CarrouselGifts />
-            }              
-            <ListNews isDetaileNews = {setGlobalState} />
+        {!globalState.isDetailNews &&
+          <Carousel/>
+        }
+        <ListNews isDetaileNews = {setGlobalState} />
+        {!globalState.isDetailNews &&
+          <CarrouselGifts />
+        }              
         </div>
         </React.Fragment>
     )

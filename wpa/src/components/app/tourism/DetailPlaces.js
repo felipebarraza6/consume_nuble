@@ -47,6 +47,7 @@ const DetailPlace = ({place, setGlobal, glogalState}) => {
             <Flex>
                 <Flex.Item>
                     <Button
+                        style={styles.button_back}
                         onClick = {()=>{
                             setGlobal({
                                 ...glogalState,
@@ -56,7 +57,7 @@ const DetailPlace = ({place, setGlobal, glogalState}) => {
                         }}
                     ><ArrowLeftOutlined style={{marginRight:'10px'}} />Lugares...</Button>
                     <h1 style={styles.title}>{place.name}</h1>
-                    <img src={place.banner_image} />
+                    <img width='100%' height='100%'  src={place.banner_image} />
                     <p style={styles.description}>
                         {place.description}
                     </p>
@@ -68,12 +69,12 @@ const DetailPlace = ({place, setGlobal, glogalState}) => {
                             return(
                             <Card key={obj.id} style={styles.comment}>
                                 <Card.Header  
-                                    title={`@${obj.user}`} 
+                                    title={<p style={{color:'white'}}>@{obj.user}</p>} 
                                     extra={<p style={styles.dateComment}>{obj.created.slice(0, 10)}</p>}
                                 />
                                 {obj.commentary &&
                                     <Card.Body>
-                                    <p>
+                                    <p style={{color:'white'}}>
                                         {obj.commentary}
                                     </p>
                                 </Card.Body>
@@ -84,7 +85,7 @@ const DetailPlace = ({place, setGlobal, glogalState}) => {
                                     content={<React.Fragment>
                                         {obj.rating > 3 ?
                                             <LikeFilled style={styles.iconColor} />:
-                                            <DislikeFilled />
+                                            <DislikeFilled style={styles.iconColor} />
                                         }
                                     </React.Fragment>} 
                                 
@@ -105,6 +106,11 @@ const DetailPlace = ({place, setGlobal, glogalState}) => {
 
 
 const styles = {
+    button_back: {
+      backgroundColor:'#531dab',
+      borderColor: '#531dab',
+      color:'white',
+    },
     title:{
         marginLeft:'20px'
     },
@@ -114,20 +120,25 @@ const styles = {
         textIndent:'30px'
     },
     comment: {
-        margin:'20px'
+        margin:'20px',
+        backgroundColor: '#120338',
+        color: 'white'
     },
     dateComment:{
-        fontSize:'13px'
+        fontSize:'13px',
+        color: 'white'
+       
     },
     badge:{
-        backgroundColor:'#389e0d',
+        backgroundColor:'#9254de',
         padding:'3px',
         paddingLeft:'8px',
         paddingRight:'8px',
-        zIndex:0
+        zIndex:0,
+        marginBottom:'20px'
     },
     iconColor:{
-        color: '#389e0d',
+        color: 'white',
         fontSize:'20px'
     },
     commentTitle:{

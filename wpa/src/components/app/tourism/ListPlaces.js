@@ -7,7 +7,7 @@ import { Card, ActivityIndicator, Flex,
         Modal, List, InputItem, TextareaItem } from 'antd-mobile'
 
 //Antd
-import {Form, Button as BottonForm} from 'antd'        
+import {Form, Typography,Button as BottonForm} from 'antd'        
 
 //Endpoints
 import { endpoints } from '../../../api/commerce/api'
@@ -21,7 +21,9 @@ import chileanLogo from '../../../assets/logo/chile.png'
 
 //Auth Context
 import {AuthContext} from '../../../containers/app/AppMb'
+import CarouselRoutes from './CarouselRoutes'
 
+const {Title} = Typography
 
 const ListPlace = ({setGlobal, stateGlobal}) => {
     
@@ -63,6 +65,7 @@ const ListPlace = ({setGlobal, stateGlobal}) => {
     },[])    
     return(
         <React.Fragment>
+            <CarouselRoutes />
             <Modal
                 visible={statePlaces.califitacion}
             >
@@ -141,7 +144,7 @@ const ListPlace = ({setGlobal, stateGlobal}) => {
                     <React.Fragment key={obj.id}>
                         <Card style={styles.card}>
                             <Card.Header 
-                                title = {obj.name}
+                                title = {<Title level={3} style={styles.title}  >{obj.name}</Title>}
                                 extra = {
                                     <Tag small={true}>
                                         {obj.region}
@@ -153,7 +156,7 @@ const ListPlace = ({setGlobal, stateGlobal}) => {
                                 <img style={styles.imageBanner} src={obj.banner_image} alt='banner' /> 
                             </Card.Body>
                             <Card.Footer 
-                                content={<Badge text={`${obj.rating}pts`} overflowCount={obj.rating} style={styles.badge} />}
+                                content={<Badge text={`${obj.rating}pts`} borderRadius={4} overflowCount={obj.rating} style={styles.badge} />}
                                 extra={
                                     <React.Fragment>
                                         <Flex justify='end'>
@@ -170,7 +173,7 @@ const ListPlace = ({setGlobal, stateGlobal}) => {
                                                 Calificar <StarOutlined style={styles.icon} />
                                             </Button>:<Button 
                                                             onClick={()=>dispatch({type:'VISIBLE'})}
-                                                            size='small' style={styles.button}>Identificate <UserOutlined style={styles.icon} /></Button>
+                                                            size='small' style={styles.button.identification}>Identificate <UserOutlined style={styles.icon} /></Button>
                                         
                                             }
                                             
@@ -204,21 +207,27 @@ const ListPlace = ({setGlobal, stateGlobal}) => {
 
 const styles = {
     buttonPlace: {
-        backgroundColor:'#389e0d',
+        backgroundColor:'#531dab',
         color:'white',
         width:'110px',                
+        marginLeft: '5px'
     },
     button: {
-        backgroundColor:'#389e0d',
+        identification:{
+          backgroundColor: '#9254de',
+          color: 'white',
+
+        },
+        backgroundColor:'#391085',
         color:'white',
         width:'140px',
         textAlign:'center',
         marginRight:'5px'        
     },  
     badge:{
-        backgroundColor:'#389e0d',
+        backgroundColor:'#531dab',
         padding:'3px',
-        paddingLeft:'8px',
+        paddingLeft:'12px',
         paddingRight:'8px',
         zIndex:0
     },
@@ -249,18 +258,21 @@ const styles = {
     btnCancel:{        
         paddingLeft:'10px',
         paddingRight: '10px',
-        backgroundColor:'#ff4d4f',
+        backgroundColor:'#9254de',
         color:'white'
 
     },
     btnForm: {
-        backgroundColor:'#389e0d', 
+        backgroundColor:'#391085', 
         color:'white', 
         width:'100%', 
         padding:'10px', 
         borderRadius:'5px', 
         border:'0px '
-    }  
+    },
+    title: {
+      color:'#391085'
+    }
 }
 
 export default ListPlace

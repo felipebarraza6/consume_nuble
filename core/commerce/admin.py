@@ -13,7 +13,12 @@ from core.commerce.models import (Enterprise,
                                 Stock, 
                                 Product,
                                 Place,
-                                Rating)
+                                Rating,
+                                Post,
+                                Route,
+                                DayNumber,
+                                ElementDay
+                                )
 
 
 @admin.register(Enterprise)
@@ -64,3 +69,20 @@ class Places(admin.ModelAdmin):
 class Ratings(admin.ModelAdmin):
     """Ratings model admin."""
     list_display = ('place', 'rating', 'commentary')    
+
+@admin.register(Post)
+class Posts(admin.ModelAdmin):
+    list_display = ('id',)
+
+@admin.register(Route)
+class Route(admin.ModelAdmin):
+    list_display = ('id',)
+
+@admin.register(DayNumber)
+class DaysNumber(admin.ModelAdmin):
+    list_display = ('id',)
+
+@admin.register(ElementDay)
+class ElementsDay(admin.ModelAdmin):
+    list_display = ('id',)
+

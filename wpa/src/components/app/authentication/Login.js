@@ -3,7 +3,7 @@ import React, {useContext, useState} from 'react'
 
 //Antd Mobile
 import { Modal, InputItem, List, WhiteSpace, Button } from 'antd-mobile'
-import {Form, Button as ButtonForm, notification}from 'antd'
+import {Form, Button as ButtonForm, notification, Typography}from 'antd'
 
 //Antd Icons
 import { UserOutlined, EllipsisOutlined, PhoneOutlined, FieldNumberOutlined } from '@ant-design/icons'
@@ -14,6 +14,9 @@ import {AuthContext} from '../../../containers/app/AppMb'
 
 //Endpoints
 import {endpoints} from '../../../api/commerce/api'
+import portada from '../../../assets/welcome/portada.png'
+
+const { Title, Paragraph } = Typography
 
 const Login = ({visible}) =>{
     
@@ -22,6 +25,7 @@ const Login = ({visible}) =>{
 
     const [signup, setSignUp] = useState({
         visible: false,
+        congratulationImage: false,
         error: ''
     })
 
@@ -36,16 +40,34 @@ const Login = ({visible}) =>{
     const CreateUser = async(data) => {
         const request = endpoints.createUser(data)
         if(request){
-            dispatch({
-                type:'NOVISIBLE'
-            })
-        
-        }
-        
+        setSignUp({...signup, visible:false})
+        setSignUp({
+            ...signup,
+            congratulationImage:true
+        })
+      }        
     }
 
     return(
         <React.Fragment>
+            <Modal
+              visible={signup.congratulationImage}
+            >
+              <Title level={2}>Bienvenido a la comunidad! </Title>
+              <img src={portada} style={{maxWidth:'100%', height:'auto'}} />
+              <Paragraph ellipsis style={{margin:'20px'}} >Integrada por 14 empresas del rubro, la asociación gremial apuesta a la unión para fortalecer sus emprendimientos, de la mano también de la identidad gastronómica regional.</Paragraph>
+              <Button style={{backgroundColor:'black', color:'white', border:'0px'}}  
+                  onClick={
+                      () => {
+                          setSignUp({
+                              ...signup,
+                              visible: false,
+                              congratulationImage: false
+                          })
+                      }
+                  }
+              >INICIAR SESION</Button>
+            </Modal>
             <Modal
             visible={visible}
             style={{
@@ -84,7 +106,7 @@ const Login = ({visible}) =>{
                     <ButtonForm htmlType="submit" style={styles.btn_login}>Aceptar</ButtonForm>            
                     <ButtonForm onClick={()=>dispatch({type:'NOVISIBLE'})} style={styles.btn_cancel}>Cancelar</ButtonForm>                 
                 </Form.Item>                
-                <Button type='ghost' inline style={{"margin":"20px"}} onClick={()=>setSignUp({...signup, visible:true})}>No tienes una cuenta? crea tu usuario</Button>
+                <Button type='ghost' inline style={{"margin":"20px", color:'black', borderColor:'black'}} onClick={()=>setSignUp({...signup, visible:true})}>No tienes una cuenta? crea tu usuario</Button>
             </Form>
             
 
@@ -97,7 +119,9 @@ const Login = ({visible}) =>{
                     CreateUser(values)
                     setSignUp({
                         ...signup,
-                        error:''
+                        error:'',
+                        visible: false,
+                        congratulationImage: true
                     })
                 }else{
                     setSignUp({
@@ -109,7 +133,6 @@ const Login = ({visible}) =>{
                 
             }}
         >
-              <Button type='primary' inline style={{"margin":"10px"}} onClick={()=>setSignUp({...signup, visible:false})}>Ir a Iniciar Sesion</Button>
             <List style={styles.list}>
             <Form.Item name='email' rules={[{ required: true, message:'Campo Obligatorio', type:'email', }]}> 
                 <InputItem placeholder='Email' >
@@ -136,23 +159,13 @@ const Login = ({visible}) =>{
                     <EllipsisOutlined />
                 </InputItem>                  
             </Form.Item>
-            <Form.Item name='first_name' rules={[{ required: true, message:'Campo Obligatorio' }]}>
-                <InputItem placeholder='Primer Nombre' type='text'>
-                    <FieldNumberOutlined />
-                </InputItem>                  
-            </Form.Item>
-            <Form.Item name='last_name' rules={[{ required: true, message:'Campo Obligatorio' }]}>
-                <InputItem placeholder='Segundo Nombre' type='text'>
-                    <FieldNumberOutlined />
-                </InputItem>                  
-            </Form.Item>
-            <p style={{color:'red'}}>{signup.error}</p>
+                        <p style={{color:'red'}}>{signup.error}</p>
             
             
             </List>
             <Form.Item>
                 <ButtonForm htmlType="submit" style={styles.btn_login}>Crear</ButtonForm>                
-                <ButtonForm onClick={()=>dispatch({type:'NOVISIBLE'})} style={styles.btn_cancel}>Cancelar</ButtonForm>                 
+                <ButtonForm onClick={()=>{ setSignUp({...signup, visible:false})}} style={styles.btn_cancel}>Cancelar</ButtonForm>                 
             </Form.Item>                
         </Form>            
 

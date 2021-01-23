@@ -23,6 +23,9 @@ router.register(r'checkouts', views.CheckoutViewSet, basename='checkouts')
 router.register(r'places', views.PlaceView, basename='places')
 router.register(r'ratings', views.RatingViewSet, basename='ratings')
 
+router.register(r'posts', views.PostViewSet, basename='posts')
+router.register(r'routes', views.RouteTourismViewSet, basename='routes')
+
 urlpatterns = [
 	path('', include(router.urls)),	
 ]

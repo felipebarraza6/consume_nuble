@@ -6,7 +6,7 @@ import { Card, ActivityIndicator, Flex,
         Button } from 'antd-mobile'
 
 //Endpoints
-import { endpoints } from '../../../../rest_wp/core/endpoints'
+import { endpoints } from '../../../../api/commerce/api'
 
 //Antd Icons
 import { EyeOutlined } from '@ant-design/icons'
@@ -20,16 +20,16 @@ const ListNews = ({ isDetaileNews }) => {
 
     const initialState = {        
         lastsPosts: null,        
-        viewDetail:false,
+        viewDetail: false,
         singleNotice: null
     }
 
     const [state, setState] = useState(initialState)
 
     const getPosts =async() =>{
-        const request = await endpoints.posts.getPosts()
+        const request = await endpoints.listPosts()
         setState({
-            lastsPosts: request.data
+            lastsPosts: request.data.results
         })
     }
 
@@ -50,12 +50,14 @@ const ListNews = ({ isDetaileNews }) => {
                         return(                            
                         <Card style={styles.cardNotice} key={obj.id}>
                             <Card.Header
-                                title={obj.title.rendered}
+                                title={obj.title}
                             />
                             <Card.Body style={{marginBottom:'10px'}}>
-                                <img style={styles.cardNotice.image} src={obj.better_featured_image.source_url} alt='imagePst' />
+                                <img style={styles.cardNotice.image} src={obj.principal_image} alt='imagePst' />
                                 <WhiteSpace />
-                                {obj.content.rendered.slice(4, 100)}...
+                                <Flex>
+                                {obj.description.slice(0, 100)}...
+                                </Flex>
                             </Card.Body>
                             <Card.Footer 
                                 content={<Button onClick={()=>{
@@ -69,7 +71,7 @@ const ListNews = ({ isDetaileNews }) => {
                                 inline 
                                 style={styles.cardNotice.button}
                             ><EyeOutlined style={{fontSize:'15px'}} /> Leer noticia</Button>}
-                                extra={<div style={styles.cardNotice.extra}>{obj.date.slice(0,10)}</div>}
+                                extra={<div style={styles.cardNotice.extra}>{obj.created.slice(0,10)}</div>}
                                 style = {styles.cardNotice.footer}
                             />                    
                         </Card>)

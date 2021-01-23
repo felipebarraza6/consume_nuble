@@ -21,18 +21,21 @@ services:
         build: 
             context: ./api
         image: api_consume_nuble
+        ports:
+          - "8000:8000"
         depends_on:
             - postgres
         volumes:
             - .:/code
-        ports:
-            - "8000:8000"
-    
-    react:
-        build: ./wpa
-        image: wpa_consume_nuble
-        ports:
-            - "80:80"
-        depends_on:
-            - django
-            - postgres
+    # react:
+    #    build: ./wpa
+    #    image: wpa_consume_nuble
+    #    environment:
+    #      - VIRTUAL_HOST= localhost
+    #      - VIRTUAL_PORT= 80
+    #    expose:
+    #        - "80"
+    #    depends_on:
+    #        - nginx_proxy
+    #        - django
+    #        - postgres

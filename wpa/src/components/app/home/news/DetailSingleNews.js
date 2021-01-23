@@ -16,18 +16,31 @@ const DetailSingleNews = ({notice, state, setState, setGlobalState }) =>{
     
     return(
         <React.Fragment>           
+            <Button 
+                icon={<RollbackOutlined />} 
+                onClick={()=>{
+                      setState({...state, viewDetail:false})
+                      setGlobalState({
+                        isDetaileNews:false
+                      })
+                  }}
+                    >
+                    Noticias
+            </Button>
+
+
             <Card style={styles.cardNotice}>
             <Card.Header
-                title={notice.title.rendered}                
+                title={notice.title}                
             />
             <Card.Body>                
-                <img src={notice.better_featured_image.source_url} style={styles.cardNotice.image} alt='post' />                
-                <div style={styles.cardNotice.spaceDate}> Publicada el {notice.date.slice(0,10)} a las {notice.date.slice(11)} Hrs</div>
-                <ShareButtons quote={notice.title.rendered} url={notice.link} notice={notice}/>
-                <div style={styles.cardNotice.textNotice} dangerouslySetInnerHTML={{ __html: notice.content.rendered }}></div>
+                <img src={notice.principal_image} style={styles.cardNotice.image} alt='post' />                
+                <div style={styles.cardNotice.spaceDate}> Publicada el {notice.created.slice(0,10)} a las {notice.created.slice(11, 19)} Hrs</div>
+                  <div style={styles.cardNotice.textNotice}>
+                    {notice.description}
+                  </div>
             </Card.Body>
             </Card>            
-            <ShareButtons quote={notice.title.rendered} url={notice.link} notice={notice}/>
             <Button icon={<RollbackOutlined />} onClick={()=>{
                 setState({...state, viewDetail:false})
                 setGlobalState({
