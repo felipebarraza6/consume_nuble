@@ -1,12 +1,12 @@
 import axios from 'axios'
 
 const INSTANCE = axios.create({
-    //baseURL:"http://45.236.131.138:8000/commerce/"
+    //baseURL:"http://app.consumenuble.cl/commerce/"
     baseURL:"http://localhost:8000/commerce/"
 })
 
 const INSTANCE_LOGIN = axios.create({
-    //baseURL:"http://45.236.131.138:8000/users/"
+    //baseURL:"http://app.consumenuble.cl/users/"
     baseURL:"http://localhost:8000/users/"
 })
 
