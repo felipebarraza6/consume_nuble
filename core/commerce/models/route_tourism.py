@@ -11,6 +11,7 @@ class Route(ApiModel):
     description = models.TextField(max_length=320)
     whats_app = models.CharField(max_length=200, null=True, blank=True)
     image_principal = models.ImageField(blank=True, null=True)
+    image_gallery = models.ImageField(blank=True, null=True)
 
     def __str__(self):
         return str(self.name)

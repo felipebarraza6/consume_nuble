@@ -55,12 +55,14 @@ const CarouselRoutes = () => {
         <React.Fragment>
           {state.routes && 
           <React.Fragment>
+            <Title level={2} style={{textAlign:'center', color:'#722ed1'}}>Rutas de Ñuble</Title>
           <Flex justify="center" style={styles.flexContainer} >
               {state.routes.map((obj)=>{
                   return(
                     <React.Fragment>
                       <img src={obj.image_principal} 
-                          key={obj.id} width='15%' height='15%'  
+                          key={obj.id} width='20%' height='20%'  
+                          style={{marginLeft:'5px', marginRight:'5px'}}
                           onClick = {
                               () => {
                                 setState({
@@ -81,8 +83,8 @@ const CarouselRoutes = () => {
           {state.route_select ? 
               <Flex style={styles.daysContainer}>
                   <Flex.Item>
-                      <Title level={4} style={styles.titleRoute} >{state.route_select.name} - Itinerario</Title>
-                      <Title level={5} style={styles.titleRoute}  >DIAS </Title>
+                      <Title level={4} style={styles.titleRoute} >{state.route_select.name} - Opcion: {state.route_select.id}</Title>
+                      <img src={state.route_select.image_gallery} width='100%' height='100%' />
                       <Button style={styles.Close}  onClick={()=>{
                           setState({
                               ...state,
@@ -91,8 +93,8 @@ const CarouselRoutes = () => {
                       }}>CERRAR</Button>
                       <Tabs
                           tabs = {days}
-                          style={{color:'black'}}
                           tabDirection={"horizontal"}
+                          tabBarTextStyle={{color:'#531dab'}}
                       >
                       {renderContent}
                       </Tabs>
